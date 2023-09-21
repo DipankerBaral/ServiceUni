@@ -14,14 +14,16 @@ const AnonymousReporting = () => {
 
   useEffect(() => {
     // Fetch the latest ID from the server
-    fetch("http://serviceuni7.ap-southeast-2.elasticbeanstalk.com/api/getLatestId")
+    fetch(
+      "http://serviceuni7.ap-southeast-2.elasticbeanstalk.com/api/getLatestId"
+    )
       .then((response) => response.json())
       .then((data) => {
         setLatestId(data.latestId);
       })
       .catch((error) => {
         console.error("Error fetching latest ID:", error);
-        // Handle error appropriately
+        // Handle error appropriatelya
       });
   }, []); // This useEffect runs only once on component mount
 
@@ -45,13 +47,16 @@ const AnonymousReporting = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://serviceuni7.ap-southeast-2.elasticbeanstalk.com/api/createData", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "http://serviceuni7.ap-southeast-2.elasticbeanstalk.com/api/createData",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         setShowSubmissionMessage(true);

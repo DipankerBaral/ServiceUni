@@ -100,7 +100,7 @@ const Login = () => {
               id="anonymous-reporting-button"
               onClick={navigateToAnonymousReporting}
             >
-              Do Anonymous Reporting
+              Do Anonymous Reportings
             </button>
           </div>
         )}
