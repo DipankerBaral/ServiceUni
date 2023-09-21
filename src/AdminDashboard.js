@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import "./admindashboard.css"
+import React, { useState, useEffect } from "react";
+import "./admindashboard.css";
 
 function AdminDashboard() {
   const [data, setData] = useState([]);
@@ -7,14 +7,14 @@ function AdminDashboard() {
 
   useEffect(() => {
     // Fetch data from your API
-    fetch('http://serviceuni7.ap-southeast-2.elasticbeanstalk.com/api/getData')
+    fetch("https://serviceunibackend.onrender.com/api/getdata")
       .then((response) => response.json())
       .then((responseData) => {
         setData(responseData);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setIsLoading(false);
       });
   }, []);
@@ -42,7 +42,6 @@ function AdminDashboard() {
             <p>Location: {item.Location.S}</p>
             <p>Time: {item.Time.S}</p>
             <p>Description: {item.Description.S}</p>
-            
           </div>
         ))
       ) : (
