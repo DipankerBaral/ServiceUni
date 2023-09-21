@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-
 import "./login.css";
 
 const Login = () => {
@@ -15,10 +14,12 @@ const Login = () => {
     {
       username: "user1",
       password: "pass1",
+      role: "user",
     },
     {
-      username: "user2",
-      password: "pass2",
+      username: "admin",
+      password: "adminpass",
+      role: "admin",
     },
   ];
 
@@ -28,14 +29,13 @@ const Login = () => {
   };
 
   const handleSubmit = (event) => {
-    //Prevent page reload
     event.preventDefault();
-
+  
     var { uname, pass } = document.forms[0];
-
+  
     // Find user login info
     const userData = database.find((user) => user.username === uname.value);
-
+  
     // Compare user info
     if (userData) {
       if (userData.password !== pass.value) {
@@ -43,12 +43,20 @@ const Login = () => {
         setErrorMessages({ name: "pass", message: errors.pass });
       } else {
         setIsSubmitted(true);
+        if (userData.role === "admin") {
+          // Navigate to AdminDashboard.js
+          navigate("/admindashboard"); // Replace with the desired route path for the admin
+        } else {
+          // Navigate to UserDashboard.js
+          navigate("/userdashboard"); // Replace with the desired route path for regular users
+        }
       }
     } else {
       // Username not found
       setErrorMessages({ name: "uname", message: errors.uname });
     }
   };
+  
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>

@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Login from "./login";
 import AnonymousReporting from "./AnonymousReporting";
+import UserDashboard from "./UserDashboard";
+import VolunteerRegistration from "./VolunterRegistration";
+import AdminDashboard from "./AdminDashboard";
 
 // Import your components
 
@@ -18,6 +21,21 @@ const Routing = () => {
           exact
           path="/anonymousreporting"
           element={<AnonymousReporting />}
+        />
+        <Route
+          exact
+          path="/UserDashboard"
+          element={<UserDashboard />}
+        />
+        <Route
+          exact
+          path="/VolunteerRegistration"
+          element={<VolunteerRegistration />}
+        />
+        <Route
+          exact
+          path="/AdminDashboard"
+          element={<AdminDashboard />}
         />
 
         {/* Private Routes: Only accessible to authenticated users */}
