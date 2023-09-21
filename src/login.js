@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 
@@ -30,12 +30,12 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+
     var { uname, pass } = document.forms[0];
-  
+
     // Find user login info
     const userData = database.find((user) => user.username === uname.value);
-  
+
     // Compare user info
     if (userData) {
       if (userData.password !== pass.value) {
@@ -56,7 +56,6 @@ const Login = () => {
       setErrorMessages({ name: "uname", message: errors.uname });
     }
   };
-  
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
