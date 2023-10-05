@@ -5,8 +5,7 @@ import AnonymousReporting from "./AnonymousReporting";
 import UserDashboard from "./UserDashboard";
 import VolunteerRegistration from "./VolunterRegistration";
 import AdminDashboard from "./AdminDashboard";
-
-// Import your components
+import LibraryService from "./LibraryService"; // Import the LibraryService component
 
 const Routing = () => {
   // Your authentication logic to check if the user is logged in
@@ -37,7 +36,12 @@ const Routing = () => {
           path="/AdminDashboard"
           element={<AdminDashboard />}
         />
-
+        {/* Add the route for the LibraryService */}
+        <Route
+          exact
+          path="/LibraryService"
+          element={<LibraryService />}
+        />
         {/* Private Routes: Only accessible to authenticated users */}
       </Routes>
     </Router>

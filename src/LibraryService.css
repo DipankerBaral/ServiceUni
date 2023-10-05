@@ -1,0 +1,26 @@
+/* LibraryService.css */
+.book-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .book-list li {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .checkout-button {
+    margin-top: 20px;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .checkout-button:hover {
+    background-color: darkgreen;
+  }
+  
