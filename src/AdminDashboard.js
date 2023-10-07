@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./admindashboard.css";
+import { useNavigate } from "react-router-dom";
 
 function AdminDashboard() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const handleLogout = () => {
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("loggedInUser");
+    navigate("/");
+  };
   useEffect(() => {
     // Fetch data from your API
     fetch("https://serviceunibackend.onrender.com/api/getdata")
@@ -32,6 +39,9 @@ function AdminDashboard() {
 
   return (
     <div className="AdminDashboard">
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
       <h1>Anonymous Reporting</h1>
       {isLoading ? (
         <p>Loading...</p>

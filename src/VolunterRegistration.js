@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import "./VolunterRegistration.css"
+import { useNavigate } from "react-router-dom";
+
+import "./VolunterRegistration.css";
 const VolunteerRegistration = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("loggedInUser");
+    navigate("/");
+  };
   // Simulated data (you should replace this with data fetched from your database)
   const volunteerActivitiesData = [
     { id: 1, activity: "Activity 1", spotsLeft: 5, enrolled: false },
@@ -17,17 +26,23 @@ const VolunteerRegistration = () => {
     setVolunteerActivities((prevActivities) =>
       prevActivities.map((activity) =>
         activity.id === id
-          ? { ...activity, enrolled: !activity.enrolled, spotsLeft: activity.enrolled ? activity.spotsLeft + 1 : activity.spotsLeft - 1 }
+          ? {
+              ...activity,
+              enrolled: !activity.enrolled,
+              spotsLeft: activity.enrolled
+                ? activity.spotsLeft + 1
+                : activity.spotsLeft - 1,
+            }
           : activity
       )
     );
   };
-  
-
-  
 
   return (
     <div>
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
       <h2>Volunteer Registration</h2>
       <table>
         <thead>

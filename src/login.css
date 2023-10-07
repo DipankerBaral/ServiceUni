@@ -78,3 +78,11 @@ input[type="submit"]:hover {
 #anonymous-reporting-button:hover {
   background-color: #0056b3; /* Change color on hover */
 }
+.register-button {
+  position: absolute;
+  top: 20px; /* Adjust the top distance as needed */
+  right: 20px; /* Adjust the right distance as needed */
+  background-color: #007bff; /* Example background color for the Register button */
+  color: #fff; /* Example text color for the Register button */
+  /* Add any other desired styles */
+}
