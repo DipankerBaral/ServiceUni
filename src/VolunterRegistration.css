@@ -46,4 +46,15 @@
     background-color: #ccc;
     cursor: not-allowed;
   }
+
+  .activity_col {
+    width: 50%; 
+  }
   
+  .spot_col {
+    width: 15%; 
+  }
+
+  .act_col {
+    width: 35%; 
+  }

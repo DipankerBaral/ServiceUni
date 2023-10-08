@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+// import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import "./VolunterRegistration.css";
 const VolunteerRegistration = () => {
@@ -10,33 +12,88 @@ const VolunteerRegistration = () => {
     localStorage.removeItem("loggedInUser");
     navigate("/");
   };
-  // Simulated data (you should replace this with data fetched from your database)
-  const volunteerActivitiesData = [
-    { id: 1, activity: "Activity 1", spotsLeft: 5, enrolled: false },
-    { id: 2, activity: "Activity 2", spotsLeft: 10, enrolled: false },
-    { id: 3, activity: "Activity 3", spotsLeft: 3, enrolled: false },
-  ];
 
-  // State to store the volunteer activities data
-  const [volunteerActivities, setVolunteerActivities] = useState(
-    volunteerActivitiesData
-  );
 
-  const handleEnrollLeave = (id) => {
-    setVolunteerActivities((prevActivities) =>
-      prevActivities.map((activity) =>
-        activity.id === id
-          ? {
+  const loggedInUserData = localStorage.getItem("loggedInUser");
+  const loggedInUser = JSON.parse(loggedInUserData);
+  const user_name = loggedInUser.username;
+
+  const [volunteerActivities, setVolunteerActivities] = useState([]);
+
+  useEffect(() => {
+    // const apiUrl = `http://localhost:8000/api/volunteer/?student_id=${student_id}`;
+    // const apiUrl = `http://localhost:8000/api/volunteer/?user_name=${user_name}`;
+    let apiUrl;
+
+    if (process.env.NODE_ENV === 'development') {
+      // DEV
+      apiUrl = `http://localhost:8000/api/volunteer/?user_name=${user_name}`;
+    } else {
+      // PROD
+      apiUrl = '';
+    }
+
+  
+    // Use Axios to make a GET request
+    axios.get(apiUrl)
+      .then(response => {
+        // Handle the response data
+        const data = response.data;
+        // Update your component state with the data
+        setVolunteerActivities(data);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error('Error fetching data:', error);
+      });
+  }, [user_name]); 
+
+
+  // Function to handle enrolling or unenrolling a student
+  const handle_enroll_unenroll = (activity_id, is_enrolled) => {
+    // const apiUrl = `http://localhost:8000/api/volunteer_enroll_unenroll/`;
+    let apiUrl;
+
+    if (process.env.NODE_ENV === 'development') {
+      // DEV
+      apiUrl = 'http://localhost:8000/api/volunteer_enroll_unenroll/';
+    } else {
+      // PROD
+      apiUrl = '';
+    }
+
+    const requestData = {
+      // student_id: student_id,
+      user_name: user_name,
+      status: is_enrolled ? "unenroll" : "enroll",
+      activity_id: activity_id
+    };
+  
+    // Send a POST request to enroll/unenroll the student
+    axios.post(apiUrl, requestData)
+      .then(response => {
+        const updatedActivities = volunteerActivities.map(activity => {
+          if (activity.act_id === activity_id) {
+            return {
               ...activity,
-              enrolled: !activity.enrolled,
-              spotsLeft: activity.enrolled
-                ? activity.spotsLeft + 1
-                : activity.spotsLeft - 1,
-            }
-          : activity
-      )
-    );
+              is_enrolled: !is_enrolled, // Toggle enrollment status
+              num_of_spots: is_enrolled
+                ? activity.num_of_spots + 1
+                : activity.num_of_spots - 1, // Update spots
+            };
+          }
+          return activity;
+        });
+
+        // Update the component state with the updated data
+        setVolunteerActivities(updatedActivities);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error('Error enrolling/unenrolling:', error);
+      });
   };
+  
 
   return (
     <div>
@@ -47,22 +104,22 @@ const VolunteerRegistration = () => {
       <table>
         <thead>
           <tr>
-            <th>Volunteer Activities</th>
-            <th>Spots Left</th>
-            <th>Action</th>
+            <th className="activity_col">Volunteer Activities</th>
+            <th className="spot_col">Number of Spots Left</th>
+            <th className="act_col">Action</th>
           </tr>
         </thead>
         <tbody>
           {volunteerActivities.map((activity) => (
-            <tr key={activity.id}>
-              <td>{activity.activity}</td>
-              <td>{activity.spotsLeft}</td>
-              <td>
+            <tr key={activity.act_id}>
+              <td className="activity_col">{activity.activity_name}</td>
+              <td className="spot_col">{activity.num_of_spots}</td>
+              <td className="act_col">
                 <button
-                  onClick={() => handleEnrollLeave(activity.id)}
-                  disabled={activity.spotsLeft === 0}
+                  onClick={() => handle_enroll_unenroll(activity.act_id, activity.is_enrolled)}
+                  disabled={activity.can_enroll === false}
                 >
-                  {activity.enrolled ? "Leave" : "Enroll"}
+                  {activity.is_enrolled ? "Unenroll" : "Enroll"}
                 </button>
               </td>
             </tr>
