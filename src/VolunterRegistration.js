@@ -21,19 +21,13 @@ const VolunteerRegistration = () => {
   const [volunteerActivities, setVolunteerActivities] = useState([]);
 
   useEffect(() => {
-    // const apiUrl = `http://localhost:8000/api/volunteer/?student_id=${student_id}`;
+    // // DEV env
     // const apiUrl = `http://localhost:8000/api/volunteer/?user_name=${user_name}`;
-    let apiUrl;
 
-    if (process.env.NODE_ENV === 'development') {
-      // DEV
-      apiUrl = `http://localhost:8000/api/volunteer/?user_name=${user_name}`;
-    } else {
-      // PROD
-      apiUrl = '';
-    }
-
+    // PROD env
+    const apiUrl = `https://volunteer-service.onrender.com/api/volunteer/?user_name=${user_name}`;
   
+
     // Use Axios to make a GET request
     axios.get(apiUrl)
       .then(response => {
@@ -51,16 +45,12 @@ const VolunteerRegistration = () => {
 
   // Function to handle enrolling or unenrolling a student
   const handle_enroll_unenroll = (activity_id, is_enrolled) => {
+    // // DEV env
     // const apiUrl = `http://localhost:8000/api/volunteer_enroll_unenroll/`;
-    let apiUrl;
 
-    if (process.env.NODE_ENV === 'development') {
-      // DEV
-      apiUrl = 'http://localhost:8000/api/volunteer_enroll_unenroll/';
-    } else {
-      // PROD
-      apiUrl = '';
-    }
+    // PROD env
+    const apiUrl = `https://volunteer-service.onrender.com/api/volunteer_enroll_unenroll/`;
+
 
     const requestData = {
       // student_id: student_id,
