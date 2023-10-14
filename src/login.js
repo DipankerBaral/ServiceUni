@@ -71,7 +71,6 @@ const Login = () => {
    const handleSubmit = async (event) => {
      event.preventDefault();
      const { uname, pass } = event.target.elements;
-+ 
     //  Find user login info
      const userData = database.find((user) => user.username === uname.value);
 
@@ -100,6 +99,8 @@ const Login = () => {
        setErrorMessages({ name: "uname", message: errors.uname });
      }
    };
+
+   
 
 // //////////////My edit while maintaning your structure. Please check
 
