@@ -66,38 +66,88 @@ const Login = () => {
     setIsSubmitted(false);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { uname, pass } = event.target.elements;
 
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
 
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
+   const handleSubmit = async (event) => {
+     event.preventDefault();
+     const { uname, pass } = event.target.elements;
++ 
+    //  Find user login info
+     const userData = database.find((user) => user.username === uname.value);
+
+     // Compare user info
+     if (userData) {
+       if (userData.password !== pass.value) {
         // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        // Store user information in localStorage
-        localStorage.setItem("loggedInUser", JSON.stringify(userData));
-        localStorage.setItem("userRole", userData.role); // Store user role in localStorage
+         setErrorMessages({ name: "pass", message: errors.pass });
+       } else {
+         // Store user information in localStorage
+         localStorage.setItem("loggedInUser", JSON.stringify(userData));
+         localStorage.setItem("userRole", userData.role); // Store user role in localStorage
 
-        setLoggedInUser(userData);
-        setIsSubmitted(true);
-        if (userData.role === "admin") {
-          // Navigate to AdminDashboard.js
-          navigate("/admindashboard"); // Replace with the desired route path for the admin
-        } else {
-          // Navigate to UserDashboard.js
-          navigate("/userdashboard"); // Replace with the desired route path for regular users
-        }
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
-  };
+         setLoggedInUser(userData);
+         setIsSubmitted(true);
+         if (userData.role === "admin") {
+           // Navigate to AdminDashboard.js
+           navigate("/admindashboard"); // Replace with the desired route path for the admin
+         } else {
+           // Navigate to UserDashboard.js
+           navigate("/userdashboard"); // Replace with the desired route path for regular users
+         }
+       }
+     } else {
+       // Username not found
+       setErrorMessages({ name: "uname", message: errors.uname });
+     }
+   };
+
+// //////////////My edit while maintaning your structure. Please check
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const { uname, pass } = event.target.elements;
+
+  //   try {
+  //       const response = await fetch("http://localhost:3001/login", {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json" },
+  //           body: JSON.stringify({ username: uname.value, password: pass.value })
+  //       });
+
+  //       const data = await response.json();
+  //       console.log("Received Data from backend: ", data); //for debugging
+
+  //       if (data.success) {
+  //           const userData = {
+  //               username: data.user, // Updated this
+  //               role: data.role      // Updated this
+  //           };
+
+  //           localStorage.setItem("loggedInUser", JSON.stringify(userData));
+  //           localStorage.setItem("userRole", userData.role);
+
+  //           setLoggedInUser(userData);
+  //           // Remove or comment out the next line since it won't show the updated value immediately
+  //           console.log("Logged In User: ", loggedInUser); // for debugging
+  //           setIsSubmitted(true);
+  //           if (userData.role === "admin") {
+  //               navigate("/admindashboard");
+  //           // } else if (userData.role === "peer") {
+  //           //   navigate("/courses");
+  //           } else {
+  //               navigate("/userdashboard");
+  //           }
+
+  //       } else {
+  //           setErrorMessages({ name: "uname", message: "Invalid username or password" });
+  //       }
+  //   } catch (error) {
+  //       console.error("Error logging in:", error);
+  //   }
+  // };
+
+
+
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>

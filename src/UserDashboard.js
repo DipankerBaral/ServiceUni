@@ -19,10 +19,10 @@ function UserDashboard() {
       </button>
       <div className="card-container">
         <CardComponent
-          title="Library Book Service"
-          body="Borrow your book with our Service Uni Online Booking"
-          buttonText="Book Now"
-          route="/LibraryService"
+          title="Peer Assisted Study Session"
+          body="Enroll in courses that will help you progress your studies!"
+          buttonText="Enroll now"
+          route="/Courses"
         />
         <CardComponent
           title="Volunteer Registration"
