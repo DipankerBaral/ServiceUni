@@ -9,9 +9,7 @@ function Courses() {
       .then(res => res.json())
       .then(data => {
         console.log("Courses Data:", data);
-        if(data.success && data.courses) {
-          setCourses(data.courses);
-        }
+        setCourses(data);
       })
       .catch(error => console.error('Error fetching courses:', error));
   }, []);
@@ -91,11 +89,11 @@ function Courses() {
       {courses.length ? (
         <ul>
             {courses.map(course => (
-              <li key={course.id}>
-                {`Course ${course.id}: ${course.name}`}
-                {enrolledCourses.some(eCourse => eCourse.course_id === course.id) 
-                  ? <button onClick={() => unenroll(course.id)}>Unenroll</button>
-                  : <button onClick={() => enroll(course.id)}>Enroll</button>}
+              <li key={course._id}>
+                {`Course: ${course.name} - Description: ${course.description}`}
+                {enrolledCourses.some(eCourse => eCourse.course_id === course._id) 
+                  ? <button onClick={() => unenroll(course._id)}>Unenroll</button>
+                  : <button onClick={() => enroll(course._id)}>Enroll</button>}
               </li>
             ))}
         </ul>
