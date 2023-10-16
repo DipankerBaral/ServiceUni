@@ -25,7 +25,7 @@ const VolunteerRegistration = () => {
     // const apiUrl = `http://localhost:8000/api/volunteer/?user_name=${user_name}`;
 
     // PROD env
-    const apiUrl = `https://volunteer-service.onrender.com/api/volunteer/?user_name=${user_name}`;
+    const apiUrl = `https://csci927-volunteerapi.onrender.com/api/volunteer/?user_name=${user_name}`;
   
 
     // Use Axios to make a GET request
@@ -49,7 +49,8 @@ const VolunteerRegistration = () => {
     // const apiUrl = `http://localhost:8000/api/volunteer_enroll_unenroll/`;
 
     // PROD env
-    const apiUrl = `https://volunteer-service.onrender.com/api/volunteer_enroll_unenroll/`;
+    // const apiUrl = `https://volunteer-service.onrender.com/api/volunteer_enroll_unenroll/`;
+    const apiUrl = `https://csci927-volunteerapi.onrender.com/api/volunteer_enroll_unenroll/`;
 
 
     const requestData = {
