@@ -14,7 +14,7 @@ function AdminDashboard() {
   };
   useEffect(() => {
     // Fetch data from your API
-    fetch("https://serviceunibackend.onrender.com/api/getdata")
+    fetch("https://serviceuni.onrender.com/api/getdata")
       .then((response) => response.json())
       .then((responseData) => {
         setData(responseData);

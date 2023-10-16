@@ -14,7 +14,7 @@ const AnonymousReporting = () => {
 
   useEffect(() => {
     // Fetch the latest ID from the server
-    fetch("https://serviceunibackend.onrender.com/api/getLatestId")
+    fetch("https://serviceuni.onrender.com/api/getLatestId")
       .then((response) => response.json())
       .then((data) => {
         setLatestId(data.latestId);
@@ -46,7 +46,7 @@ const AnonymousReporting = () => {
 
     try {
       const response = await fetch(
-        "https://serviceunibackend.onrender.com/api/createData",
+        "https://serviceuni.onrender.com/api/createData",
         {
           method: "POST",
           headers: {

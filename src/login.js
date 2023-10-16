@@ -66,43 +66,39 @@ const Login = () => {
     setIsSubmitted(false);
   };
 
-
-
-   const handleSubmit = async (event) => {
-     event.preventDefault();
-     const { uname, pass } = event.target.elements;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const { uname, pass } = event.target.elements;
     //  Find user login info
-     const userData = database.find((user) => user.username === uname.value);
+    const userData = database.find((user) => user.username === uname.value);
 
-     // Compare user info
-     if (userData) {
-       if (userData.password !== pass.value) {
+    // Compare user info
+    if (userData) {
+      if (userData.password !== pass.value) {
         // Invalid password
-         setErrorMessages({ name: "pass", message: errors.pass });
-       } else {
-         // Store user information in localStorage
-         localStorage.setItem("loggedInUser", JSON.stringify(userData));
-         localStorage.setItem("userRole", userData.role); // Store user role in localStorage
+        setErrorMessages({ name: "pass", message: errors.pass });
+      } else {
+        // Store user information in localStorage
+        localStorage.setItem("loggedInUser", JSON.stringify(userData));
+        localStorage.setItem("userRole", userData.role); // Store user role in localStorage
 
-         setLoggedInUser(userData);
-         setIsSubmitted(true);
-         if (userData.role === "admin") {
-           // Navigate to AdminDashboard.js
-           navigate("/admindashboard"); // Replace with the desired route path for the admin
-         } else {
-           // Navigate to UserDashboard.js
-           navigate("/userdashboard"); // Replace with the desired route path for regular users
-         }
-       }
-     } else {
-       // Username not found
-       setErrorMessages({ name: "uname", message: errors.uname });
-     }
-   };
+        setLoggedInUser(userData);
+        setIsSubmitted(true);
+        if (userData.role === "admin") {
+          // Navigate to AdminDashboard.js
+          navigate("/admindashboard"); // Replace with the desired route path for the admin
+        } else {
+          // Navigate to UserDashboard.js
+          navigate("/userdashboard"); // Replace with the desired route path for regular users
+        }
+      }
+    } else {
+      // Username not found
+      setErrorMessages({ name: "uname", message: errors.uname });
+    }
+  };
 
-   
-
-// //////////////My edit while maintaning your structure. Please check
+  // //////////////My edit while maintaning your structure. Please check
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -146,9 +142,6 @@ const Login = () => {
   //       console.error("Error logging in:", error);
   //   }
   // };
-
-
-
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
