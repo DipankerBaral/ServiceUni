@@ -15,7 +15,7 @@ const Login = () => {
   const backgroundImageUrl =
     "https://live-production.wcms.abc-cdn.net.au/07de6b31c4f08d58e715ecc7837f0db6?impolicy=wcms_crop_resize&cropH=1080&cropW=1920&xPos=0&yPos=100&width=862&height=485"; // Replace with the actual online URL to your background image
   // Make an HTTP request to the API
-  fetch("https://serviceunibackend.onrender.com/api/getRegisterData")
+  fetch("https://serviceuni.onrender.com/api/getRegisterData")
     .then((response) => response.json())
     .then((data) => {
       // Assuming the API response is an array of objects with properties like "Username," "Password," and "Role"
