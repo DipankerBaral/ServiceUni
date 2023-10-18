@@ -37,7 +37,7 @@ const Register = () => {
     };
 
     // Make a POST request to your API
-    fetch("https://serviceunibackend.onrender.com/api/register", {
+    fetch("https://serviceuni.onrender.com/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
