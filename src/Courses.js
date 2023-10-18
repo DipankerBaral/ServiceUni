@@ -94,6 +94,12 @@ function Courses() {
     }
   };
 
+  // Function to get course name by ID
+  const getCourseName = (courseId) => {
+    const course = courses.find((course) => course._id === courseId);
+    return course ? course.name : "Unknown Course";
+  };
+
   return (
     <div>
       <h1>Peer Assisted Study Session</h1>
@@ -115,6 +121,20 @@ function Courses() {
         </ul>
       ) : (
         <p>No courses available.</p>
+      )}
+
+      <h2>Enrolled Courses</h2>
+      {enrolledCourses.length ? (
+        <ul>
+          {enrolledCourses.map((enrolledCourse) => (
+            <li key={enrolledCourse.course_id}>
+              {/* Display course name based on ID */}
+              {`Course Name: ${getCourseName(enrolledCourse.course_id)}`}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No enrolled courses.</p>
       )}
     </div>
   );
